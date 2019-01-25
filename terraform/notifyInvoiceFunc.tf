@@ -17,6 +17,8 @@ resource "aws_lambda_function" "notifyInvoiceFunc" {
   memory_size = "320"
   source_code_hash = "${base64sha256(file("notifyInvoiceFunc/target/notifyInvoiceFunc-0.1.jar"))}"
 
+  reserved_concurrent_executions = 1
+
   environment {
     variables {
       SENDGRID_API_KEY = "${var.sendgrid_api_key}",

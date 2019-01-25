@@ -16,6 +16,8 @@ resource "aws_lambda_function" "generateBillingItemFunc" {
   memory_size = "448"
   source_code_hash = "${base64sha256(file("generateBillingItemFunc/target/generateBillingItemFunc-0.1-package.zip"))}"
 
+  reserved_concurrent_executions = 1
+
   environment {
     variables {
       INVOICE_GENERATION_REQUEST_QUEUE = "${aws_sqs_queue.invoice_generation_request_queue.name}"

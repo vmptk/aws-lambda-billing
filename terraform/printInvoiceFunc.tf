@@ -17,6 +17,8 @@ resource "aws_lambda_function" "printInvoiceFunc" {
   memory_size = "320"
   source_code_hash = "${base64sha256(file("printInvoiceFunc/target/printInvoiceFunc-0.1.jar"))}"
 
+  reserved_concurrent_executions = 1
+
   environment {
     variables {
       JS_REPORT_URL = "${var.jsreport_url}",

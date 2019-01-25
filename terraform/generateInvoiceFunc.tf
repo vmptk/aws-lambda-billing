@@ -17,6 +17,8 @@ resource "aws_lambda_function" "generateInvoiceFunc" {
   memory_size = "448"
   source_code_hash = "${base64sha256(file("generateInvoiceFunc/target/generateInvoiceFunc-0.1.jar"))}"
 
+  reserved_concurrent_executions = 1
+
   environment {
     variables {
       INVOICE_PRINT_REQUEST_QUEUE = "${aws_sqs_queue.invoice_print_request_queue.name}"
